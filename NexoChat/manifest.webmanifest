@@ -1,0 +1,10 @@
+{
+  "name":"NexoChat — Real people. Real conversations.",
+  "short_name":"NexoChat",
+  "start_url":"/",
+  "display":"standalone",
+  "background_color":"#ffffff",
+  "theme_color":"#ffffff",
+  "description":"Real friends, private chats and human group conversations.",
+  "icons":[{"src":"/assets/nexochat-icon-192.png","sizes":"192x192","type":"image/png"},{"src":"/assets/nexochat-icon-512.png","sizes":"512x512","type":"image/png"}]
+}

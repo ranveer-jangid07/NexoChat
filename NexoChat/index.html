@@ -1,0 +1,88 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>NexoChat — Real people. Real conversations.</title>
+<link rel="manifest" href="manifest.webmanifest">
+<meta name="theme-color" content="#ffffff">
+<link rel="icon" href="assets/nexochat-icon-192.png">
+<link rel="apple-touch-icon" href="assets/nexochat-icon-192.png">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<link rel="stylesheet" href="Nexo.css">
+</head>
+<body>
+<div class="bg-orb orb-a"></div><div class="bg-orb orb-b"></div>
+<div id="welcomePage" class="welcome-shell">
+  <div class="welcome-glow glow-one"></div><div class="welcome-glow glow-two"></div>
+  <div class="welcome-card">
+    <div class="welcome-brand"><img src="assets/nexochat-icon-192.png" alt="NexoChat"><div><b>NexoChat</b><span>REAL SOCIAL CHAT</span></div></div>
+    <div class="welcome-slide active" data-slide="0"><div class="welcome-art art-people"><span>👋</span><span>💬</span><span>👥</span></div><small>WELCOME TO NEXOCHAT</small><h1>Real people.<br><em>Real conversations.</em></h1><p>Connect with friends, chat one-to-one and build real groups in one simple social space.</p></div>
+    <div class="welcome-slide" data-slide="1"><div class="welcome-art art-chat"><span>💬</span><span>✨</span><span>💙</span></div><small>MEET YOUR PEOPLE</small><h1>Find friends.<br><em>Stay connected.</em></h1><p>Search people, send friend requests and start private conversations that stay between real users.</p></div>
+    <div class="welcome-slide" data-slide="2"><div class="welcome-art art-group"><span>👨‍👩‍👧‍👦</span><span>💬</span><span>🤝</span></div><small>CHAT TOGETHER</small><h1>Groups made<br><em>for humans.</em></h1><p>Create groups, invite friends and keep the conversation going together.</p></div>
+    <div class="welcome-dots"><button class="active" data-dot="0"></button><button data-dot="1"></button><button data-dot="2"></button></div>
+    <div class="welcome-actions"><button id="welcomeSkip" class="welcome-skip">Skip</button><button id="welcomeNext" class="welcome-next">Next <span>→</span></button></div>
+    <div class="welcome-credit">Created by <b>Ranveer Jangid</b></div>
+  </div>
+</div>
+<div id="toast" class="toast"></div>
+
+<section id="authPage" class="auth-shell">
+  <div class="auth-visual">
+    <div class="brand-mark">N</div><span class="eyebrow">NEXOCHAT</span>
+    <h1>Connect. Chat.<br><span>Stay close.</span></h1>
+    <p>Real friends, realtime chats, groups and Nexo AI — in one blue space.</p>
+    <div class="preview-card"><div class="preview-top"><div class="avatar">R</div><div><b>Rahul</b><small><i></i> Online · Friend</small></div></div><div class="bubble left">Hey 👋 Group chat kab?</div><div class="bubble right">Aaj evening 😄</div><div class="bubble left">Done! I'll add everyone.</div></div>
+  </div>
+  <div class="auth-card">
+    <div class="mobile-brand"><div class="brand-mark">N</div><b>NexoChat</b></div>
+    <span class="eyebrow" id="authEyebrow">WELCOME BACK</span><h2 id="authTitle">Sign in to NexoChat</h2><p id="authSubtitle">Your conversations are waiting for you.</p>
+    <button id="googleButton" class="ghost wide">G&nbsp; Continue with Google</button><div class="or"><span>or continue with email</span></div>
+    <form id="authForm"><label>Email<input id="email" type="email" autocomplete="email" required placeholder="you@example.com"></label><label>Password<div class="password"><input id="password" type="password" minlength="6" required placeholder="Minimum 6 characters"><button id="togglePassword" type="button">Show</button></div></label><div class="row-between"><label class="check"><input id="remember" type="checkbox" checked> Remember me</label><button id="forgotPassword" class="text-btn" type="button">Forgot password?</button></div><button id="submitButton" class="primary wide" type="submit">Sign In <span>→</span></button></form>
+    <p class="switch" id="switchAuth">New to NexoChat? <button id="switchButton" class="text-btn" type="button">Create account</button></p>
+  </div>
+</section>
+
+<section id="profilePage" class="center-page hidden"><div class="profile-card"><span class="eyebrow">PROFILE SETUP</span><div class="brand-mark">N</div><h2>Make your profile yours</h2><p>Friends will see this information in NexoChat.</p><button id="profilePhotoButton" class="avatar-picker" type="button"><span id="photoPlaceholder">+</span><img id="profilePreview" alt="" hidden></button><input id="profilePhotoInput" type="file" accept="image/*" hidden><label>Display name<input id="displayName" maxlength="40" placeholder="Your name"></label><label>Username<div class="username"><span>@</span><input id="username" maxlength="24" placeholder="yourusername"></div></label><label>Bio <small>optional</small><textarea id="bio" maxlength="160" placeholder="A little about you..."></textarea></label><button id="finishProfile" class="primary wide" type="button">Enter NexoChat <span>→</span></button></div></section>
+
+<section id="appPage" class="app-shell hidden">
+  <aside class="sidebar"><div class="side-brand"><div class="brand-mark">N</div><b>NexoChat</b></div><div class="me-mini"><div id="sideAvatar" class="avatar">U</div><div><b id="sideName">You</b><small id="sideHandle">@username</small></div></div><nav>
+<button class="nav-btn active" data-view="home"><span class="nav-icon">⌂</span><span>Chats</span></button>
+<button class="nav-btn" data-view="friends"><span class="nav-icon">♙</span><span>Friends</span><em id="friendBadge" hidden></em></button>
+<button class="nav-btn" data-view="groups"><span class="nav-icon">♧</span><span>Groups</span></button>
+<button class="nav-btn" data-view="notifications"><span class="nav-icon">♢</span><span>Notifications</span><em id="notificationBadge" hidden></em></button>
+<button class="nav-btn" data-view="settings"><span class="nav-icon">⚙</span><span>Settings</span></button>
+</nav><button id="logoutButton" class="logout">↪ <span>Log out</span></button></aside>
+  <main class="main-panel">
+    <header class="topbar"><div><span class="eyebrow" id="viewEyebrow">YOUR SPACE</span><h1 id="viewTitle">Home</h1></div><div class="top-actions"><button id="mobileSearch" class="icon-btn">⌕</button><button id="profileButton" class="profile-chip"><span id="topAvatar" class="avatar">U</span><span id="topName">You</span></button></div></header>
+    <section id="view-home" class="view"></section>
+    <section id="view-friends" class="view hidden"></section>
+    <section id="view-chats" class="view hidden"></section>
+    <section id="view-groups" class="view hidden"></section>
+    <section id="view-notifications" class="view hidden"></section>
+    <section id="view-settings" class="view hidden"></section>
+  </main>
+  <aside class="context-panel" aria-label="Conversation information">
+    <div class="context-profile">
+      <div class="ai-ring"><div class="avatar large">N</div></div>
+      <h2>NexoChat</h2><p>Real conversations</p>
+      <span class="status-pill"><i></i> Human chat</span>
+      <div class="context-actions"><button id="contextMessage" class="context-action active"><span>●</span><small>Chat</small></button><button id="contextCall" class="context-action" disabled><span>☎</span><small>Call</small></button><button id="contextVideo" class="context-action" disabled><span>▣</span><small>Video</small></button><button id="contextMore" class="context-action"><span>•••</span><small>More</small></button></div>
+    </div>
+    <div class="context-list">
+      <div class="context-row"><span>▧</span><b>Media</b><em>Shared in chat</em></div>
+      <div class="context-row"><span>▱</span><b>Files</b><em>Attachments</em></div>
+      <div class="context-row"><span>↗</span><b>Shared Links</b><em>In conversation</em></div>
+      <div class="context-row"><span>☆</span><b>Starred Messages</b><em>Coming later</em></div>
+    </div>
+    <div class="context-note"><small>NexoChat</small><p>Good conversations lead to great connections. 💙</p></div>
+  </aside>
+  <nav class="mobile-nav"><button class="nav-btn active" data-view="home"><span class="nav-icon">●</span><span>Chats</span></button><button class="nav-btn" data-view="friends"><span class="nav-icon">♙</span><span>Friends</span></button><button class="nav-btn" data-view="groups"><span class="nav-icon">♧</span><span>Groups</span></button><button class="nav-btn" data-view="settings"><span class="nav-icon">◯</span><span>Settings</span></button></nav>
+</section>
+
+<div id="chatOverlay" class="chat-overlay hidden"><div class="chat-window"><header><button id="closeChat" class="icon-btn">←</button><div id="chatAvatar" class="avatar">U</div><div class="chat-head-copy"><b id="chatTitle">Chat</b><small id="chatStatus">Online</small></div><button id="chatMore" class="icon-btn">⋯</button></header><div id="chatMessages" class="chat-messages"></div><div id="typingLine" class="typing-line hidden">typing…</div><form id="chatForm" class="composer"><button id="attachButton" type="button" class="icon-btn" title="Attach a file">＋</button><input id="chatInput" autocomplete="off" placeholder="Write a message…"><input id="chatFileInput" type="file" hidden><button class="send" type="submit">↑</button></form></div></div>
+
+<script src="Nexo.js"></script>
+<script>if("serviceWorker" in navigator){navigator.serviceWorker.register("sw.js").catch(()=>{});}</script>
+</body></html>
